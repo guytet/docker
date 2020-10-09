@@ -1,0 +1,13 @@
+version: "2.0"
+
+services:
+ port_scanner:
+     build: "."
+     image: scanner_image
+     container_name: port_scanner
+     network_mode: bridge
+     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./scan.py:/usr/local/bin/scan.py:ro
+      - ./hosts_dict.py:/usr/local/bin/host_dict.py:ro
+      - ./send_mail.py:/usr/local/bin/send_mail.py:ro
