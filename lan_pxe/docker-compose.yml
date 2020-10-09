@@ -1,0 +1,36 @@
+version: "2.0"
+
+services:
+  dhcp_tftp:
+     build: "./dnsmasq"
+     image: dnsmasq_debian
+     container_name: dnsmasq
+     restart: always
+     hostname: dnsmasq
+     cap_add:
+      - NET_ADMIN
+     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf/:ro
+      - /docker_data/pxe_debian/dnsmasq.log:/var/log/dnsmasq.log:rw
+      - /docker_data/pxe_debian/images/:/var/lib/tftpboot/images:ro
+      - ./dnsmasq/tftpboot:/var/lib/tftpboot
+     network_mode: host
+  
+  http:
+     build: "./lighttpd"
+     image: lighttpd
+     container_name: lighttpd
+     restart: always
+     hostname: lighttpd
+     ports:
+      - "80:80/tcp"
+     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./lighttpd/lighttpd.conf:/etc/lighttpd/lighttpd.conf
+      - ./lighttpd/kickstart/:/var/www/html/kickstart
+      - ./lighttpd/preseed/:/var/www/html/preseed
+      - /mounts/centos7:/var/www/html/centos7
+      - /mounts/fedora-server30:/var/www/html/fedora-server30
+      - /mounts/fedora-server32:/var/www/html/fedora-server32
+     network_mode: "bridge"

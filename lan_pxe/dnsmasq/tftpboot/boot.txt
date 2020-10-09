@@ -1,0 +1,12 @@
+
+
+- Boot Menu -
+=============
+
+stretch
+buster
+centos7
+fedora30-server
+fedora32-server
+xenial
+bionic

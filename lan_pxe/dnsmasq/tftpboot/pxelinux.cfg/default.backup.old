@@ -1,0 +1,61 @@
+DISPLAY boot.txt
+DEFAULT fedora32-server
+PROMPT 5
+TIMEOUT 50 
+TOTALTIMEOUT 6000
+
+# ubuntu
+LABEL trusty
+ KERNEL images/trusty/linux
+ APPEND initrd=images/trusty/initrd.gz url=http://10.12.35.14/trusty.lvm.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true 
+
+LABEL xenial
+ KERNEL images/xenial/linux
+ APPEND initrd=images/xenial/initrd.gz url=http://10.12.35.14/xenial.lvm.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+LABEL bionic
+ KERNEL images/bionic/linux
+ APPEND initrd=images/bionic/initrd.gz url=http://10.12.35.14/preseed/bionic/preseed.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+
+# debian
+LABEL stretch
+ KERNEL images/stretch/linux
+ APPEND initrd=images/stretch/initrd.gz url=http://10.12.35.14/preseed/stretch/preseed.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+LABEL buster
+ KERNEL images/buster/linux
+ APPEND initrd=images/buster/initrd.gz url=http://10.12.35.14/preseed/buster/preseed.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+# redhat
+# grant redhat systems at least 1260 MB of RAM to save from installation issues
+LABEL centos7
+        KERNEL images/centos7/vmlinuz
+        APPEND initrd=images/centos7/initrd.img inst.ks=http://10.12.35.14/kickstart/centos7/ks.cfg
+
+LABEL fedora30-server
+        KERNEL images/fedora30-server/vmlinuz
+        APPEND initrd=images/fedora30-server/initrd.img inst.ks=http://10.12.35.14/kickstart/fedora30-server/ks.cfg
+
+LABEL fedora32-server
+        KERNEL images/fedora32-server/vmlinuz
+        APPEND initrd=images/fedora32-server/initrd.img inst.ks=http://10.12.35.14/kickstart/fedora32-server/ks.cfg
+
+
+LABEL fedora
+        KERNEL images/fedora/vmlinuz
+        APPEND initrd=images/fedora/initrd.img inst.ks=http://10.12.35.14/fedora-ks.cfg
+
+LABEL fedora-ap
+        KERNEL images/fedora/vmlinuz
+        APPEND initrd=images/fedora/initrd.img inst.ks=http://10.12.35.14/wifi-ap-kickstart.cfg
+
+
+#LABEL xenial_from_iso
+#        LINUX memdisk
+#        INITRD images/server_16_from_iso/ubuntu-16.04.4-server-amd64.iso
+#        APPEND iso
+
+#LABEL bionic_kickstart
+#        KERNEL images/bionic/linux
+#        APPEND initrd=images/bionic/initrd.gz -- ks=http://192.168.10.1/bionic_kickstart.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true

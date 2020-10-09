@@ -1,0 +1,36 @@
+DISPLAY boot.txt
+DEFAULT fedora32-server
+PROMPT 5
+TIMEOUT 50 
+TOTALTIMEOUT 6000
+
+
+LABEL xenial
+ KERNEL images/xenial/linux
+ APPEND initrd=images/xenial/initrd.gz url=http://{SERVER_IP/xenial.lvm.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+LABEL bionic
+ KERNEL images/bionic/linux
+ APPEND initrd=images/bionic/initrd.gz url=http://{SERVER_IP/preseed/bionic/preseed.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+
+LABEL stretch
+ KERNEL images/stretch/linux
+ APPEND initrd=images/stretch/initrd.gz url=http://{SERVER_IP/preseed/stretch/preseed.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+LABEL buster
+ KERNEL images/buster/linux
+ APPEND initrd=images/buster/initrd.gz url=http://{SERVER_IP/preseed/buster/preseed.cfg language=en country=US ask_detect=false priority=critical auto=true interface=auto debian-installer/allow_unauthenticated_ssl=true
+
+# grant redhat systems at least 1260 MB of RAM to save from installation issues
+LABEL centos7
+        KERNEL images/centos7/vmlinuz
+        APPEND initrd=images/centos7/initrd.img inst.ks=http://{SERVER_IP/kickstart/centos7/ks.cfg
+
+LABEL fedora30-server
+        KERNEL images/fedora30-server/vmlinuz
+        APPEND initrd=images/fedora30-server/initrd.img inst.ks=http://{SERVER_IP/kickstart/fedora30-server/ks.cfg
+
+LABEL fedora32-server
+        KERNEL images/fedora32-server/vmlinuz
+        APPEND initrd=images/fedora32-server/initrd.img inst.ks=http://{SERVER_IP/kickstart/fedora32-server/ks.cfg
