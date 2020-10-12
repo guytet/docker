@@ -1,6 +1,6 @@
 FROM debian:buster
 
-RUN \ apt-get -y update
+RUN \ 
     apt update && \
     apt install python3
 
